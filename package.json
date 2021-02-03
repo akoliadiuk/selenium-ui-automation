@@ -2,22 +2,23 @@
   "name": "selenium_ui_automation",
   "version": "1.0.0",
   "description": "Test repository for wibbitz.com",
-  "main": "index.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "cucumber-js --require-module @babel/register test/features/view.clip.feature"
   },
   "author": "Andrii",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.12.13",
     "@babel/polyfill": "^7.12.1",
+    "@cucumber/cucumber": "^7.0.0",
     "chai": "^4.2.0",
     "chromedriver": "^88.0.0",
-    "cucumber": "^7.0.0-rc.0",
     "selenium-webdriver": "^4.0.0-alpha.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
+    "@babel/node": "^7.12.13",
     "@babel/preset-env": "^7.12.13"
   }
 }

@@ -1,4 +1,4 @@
-import { browser } from './webdriver';
+import browser from './webdriver';
 
 module.exports = function() {
     this.After(function() {
