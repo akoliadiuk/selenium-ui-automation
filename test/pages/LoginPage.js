@@ -4,32 +4,45 @@ import { until } from "selenium-webdriver";
 import HomePage from "./HomePage";
 
 export default class LoginPage extends BasePage {
+    #emailFieldLocator;
+    #passwordFieldLocator;
+    #submitButtonLocator;
+
     constructor() {
         super();
         this.url += "/#/login";
+        this.#emailFieldLocator = "input[name=email]";
+        this.#passwordFieldLocator = "input[name=password]";
+        this.#submitButtonLocator = "button[name=submit]";
     }
 
-    #emailField() {
-        return this.browser.findElement(By.css("input[name=email]"));
+    async open() {
+        await super.open();
+        return await this.waitUntilLoaded();
     }
 
-    #passwordField() {
-        return this.browser.findElement(By.css("input[name=password]"));
+    async #emailField() {
+        return this.browser.findElement(By.css(this.#emailFieldLocator));
     }
 
-    #submitButton() {
-        return this.browser.findElement(By.css("button[name=submit]"))
+    async #passwordField() {
+        return this.browser.findElement(By.css(this.#passwordFieldLocator));
     }
 
-    waitUntilLoaded() {
-        this.browser.wait(until.elementIsVisible(this.#emailField()));
+    async #submitButton() {
+        return this.browser.findElement(By.css(this.#submitButtonLocator));
+    }
+
+    async waitUntilLoaded() {
+        await this.browser.wait(until.elementLocated(By.css(this.#emailFieldLocator)));
+        await this.browser.wait(until.elementIsVisible(await this.#emailField()))
         return this;
     }
 
-    login(email, password) {
-        this.#emailField().sendKeys(email);
-        this.#passwordField().sendKeys(password)
-        this.#submitButton().click();
-        return new HomePage();
+    async login(email, password) {
+        await (await this.#emailField()).sendKeys(email);
+        await (await this.#passwordField()).sendKeys(password)
+        await (await this.#submitButton()).click();
+        return await new HomePage().waitUntilLoaded();
     }
 }
