@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Test repository for wibbitz.com",
   "scripts": {
-    "test": "cucumber-js --require-module @babel/register test/features/view.clip.feature"
+    "test": "cucumber-js --require-module @babel/register --require-module @babel/polyfill test/features/view.clip.feature"
   },
   "author": "Andrii",
   "license": "ISC",
   "dependencies": {
-    "@babel/plugin-proposal-private-methods": "^7.12.13",
     "@babel/polyfill": "^7.12.1",
     "@cucumber/cucumber": "^7.0.0",
     "chai": "^4.2.0",
@@ -19,6 +18,8 @@
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/node": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/plugin-proposal-private-methods": "^7.12.13",
     "@babel/preset-env": "^7.12.13"
   }
 }
